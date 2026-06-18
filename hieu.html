@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Cá Nhân - Trần Hiếu</title>
+    <style>
+        :root {
+            --bg-cream: #f4f3ef;
+            --teal-main: #0ea493;
+            --yellow-accent: #fbc02d;
+            --orange-accent: #f26440;
+            --text-dark: #1a1a1a;
+            --text-muted: #555555;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #dcdcdb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        /* Khung bao ngoài của CV */
+        .cv-container {
+            background-color: var(--bg-cream);
+            width: 810px;
+            min-height: 1130px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Họa tiết lưới mờ phía bên trái giống mẫu */
+        .left-column {
+            width: 58%;
+            padding: 40px 30px;
+            background-image: 
+                linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .right-column {
+            width: 42%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* --- LEFT COLUMN STYLES --- */
+        /* Nút tròn trang trí góc trên */
+        .decor-dots {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .dot-orange { background-color: var(--orange-accent); }
+        .dot-cream { background-color: #fff; border: 1px solid #ccc; }
+        .dot-teal { background-color: var(--teal-main); }
+
+        header .name {
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--text-dark);
+            line-height: 1.1;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .title-badge {
+            display: inline-flex;
+            align-items: center;
+            border: 2px solid var(--text-dark);
+            border-radius: 25px;
+            padding: 6px 20px;
+            font-weight: 700;
+            font-size: 13px;
+            background-color: #fff;
+            gap: 10px;
+            text-transform: uppercase;
+        }
+        .title-badge::before {
+            content: "🔍";
+            font-size: 14px;
+        }
+
+        /* Tiêu đề mục (Heading Section) với icon hình tròn */
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid var(--text-dark);
+            border-radius: 25px;
+            padding: 5px 15px;
+            background-color: #fff;
+            width: fit-content;
+            font-size: 16px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+        .section-title::before {
+            content: "🎙️";
+            background-color: var(--yellow-accent);
+            border: 1px solid var(--text-dark);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .content-group {
+            margin-bottom: 15px;
+        }
+        .content-group h3 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-dark);
+        }
+        .content-group .timeline {
+            color: var(--orange-accent);
+            font-weight: 800;
+            font-size: 15px;
+            margin: 4px 0 8px 0;
+            text-transform: uppercase;
+        }
+        .content-group p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        /* Danh sách kỹ năng */
+        .skills-list {
+            list-style: none;
+            padding-left: 5px;
+        }
+        .skills-list li {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 7px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .skills-list li::before {
+            content: "•";
+            color: var(--text-dark);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* --- RIGHT COLUMN STYLES --- */
+        /* Khung chứa ảnh phía trên bên phải */
+        .photo-section {
+            height: 420px;
+            background-color: var(--yellow-accent);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 20px;
+        }
+        
+        /* Ngôi sao bốn cánh trang trí góc ảnh */
+        .star-decor {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 32px;
+            color: var(--text-dark);
+        }
+
+        /* Ô CHỨA ẢNH CHÂN DUNG */
+        .image-box {
+            width: 230px;
+            height: 310px;
+            background-color: #fff;
+            border: 3px solid var(--text-dark);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: -8px 8px 0px var(--teal-main);
+            z-index: 2;
+        }
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Khối màu xanh lục bảo phía dưới */
+        .teal-section {
+            background-color: var(--teal-main);
+            flex-grow: 1;
+            padding: 40px 25px;
+            color: var(--text-dark);
+            border-left: 3px solid var(--text-dark);
+            border-top: 3px solid var(--text-dark);
+            margin-top: -3px;
+        }
+        .teal-section .section-title {
+            background-color: #fff;
+        }
+        .teal-section p {
+            font-size: 13.5px;
+            line-height: 1.6;
+            font-weight: 500;
+            text-align: justify;
+        }
+
+        /* Khung thông tin liên hệ kiểu Widget ở dưới cùng góc phải */
+        .contact-widget {
+            background-color: var(--bg-cream);
+            border: 3px solid var(--text-dark);
+            border-radius: 12px;
+            margin: 25px;
+            padding: 20px 15px;
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            box-shadow: 4px 4px 0px var(--text-dark);
+            background-image: radial-gradient(var(--text-dark) 1px, transparent 0);
+            background-size: 12px 12px;
+            background-color: #fff;
+        }
+        
+        /* Thanh thanh tiêu đề giả lập cửa sổ hệ điều hành */
+        .widget-header {
+            background-color: var(--orange-accent);
+            border-bottom: 3px solid var(--text-dark);
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            height: 24px;
+            border-top-left-radius: 9px;
+            border-top-right-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            gap: 4px;
+        }
+        .widget-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: 1px solid var(--text-dark);
+            background-color: #fff;
+        }
+
+        .contact-content {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--text-dark);
+            padding-bottom: 5px;
+        }
+        .contact-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        /* Nút gạt Toggle trang trí giống thiết kế mẫu */
+        .toggle-switch {
+            width: 34px;
+            height: 18px;
+            background-color: var(--yellow-accent);
+            border: 2px solid var(--text-dark);
+            border-radius: 10px;
+            position: relative;
+        }
+        .toggle-switch::after {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--teal-main);
+            border: 1px solid var(--text-dark);
+            border-radius: 50%;
+            top: 2px;
+            right: 2px;
+        }
+        .contact-item:nth-child(2) .toggle-switch { background-color: var(--teal-main); }
+        .contact-item:nth-child(2) .toggle-switch::after { background-color: var(--yellow-accent); }
+
+        /* Khối lục giác tổ ong trang trí góc dưới cùng bên trái */
+        .hexagon-decor {
+            position: absolute;
+            bottom: -15px;
+            left: -15px;
+            font-size: 50px;
+            color: var(--yellow-accent);
+            opacity: 0.4;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cv-container">
+        
+        <!-- CỘT BÊN TRÁI (LƯỚI TOÁN HỌC & THÔNG TIN CHÍNH) -->
+        <div class="left-column">
+            <div>
+                <div class="decor-dots">
+                    <span class="dot dot-orange"></span>
+                    <span class="dot dot-cream"></span>
+                    <span class="dot dot-teal"></span>
+                </div>
+                
+                <header>
+                    <h1 class="name">TRẦN HIẾU</h1>
+                    <div class="title-badge">Nhân viên văn phòng / Nhân viên kỹ thuật</div>
+                </header>
+            </div>
+
+            <!-- MỤC 1: KINH NGHIỆM & DỰ ÁN -->
+            <section>
+                <div class="section-title">Kinh nghiệm & Dự án</div>
+                <div class="content-group">
+                    <h3>Tối ưu quy trình & Tự động hóa văn phòng</h3>
+                    <div class="timeline">2024 - Hiện tại</div>
+                    <p>
+                        Xây dựng và triển khai thành công hệ thống tiện ích tự động hóa công việc văn phòng thông qua tích hợp các giải pháp AI vào Word và Excel. Nghiên cứu phát triển các mô hình chatbot thông minh hỗ trợ truy xuất và xử lý dữ liệu báo cáo chuẩn xác, rút ngắn đáng kể thời gian thao tác nghiệp vụ và nâng cao hiệu quả vận hành thực tế.
+                    </p>
+                </div>
+            </section>
+
+            <!-- MỤC 2: HỌC VẤN -->
+            <section>
+                <div class="section-title">Học vấn & Nền tảng</div>
+                <div class="content-group">
+                    <h3>Đã Tốt Nghiệp THPT (12/12)</h3>
+                    <div class="timeline">Trường THPT Nông Cống 3</div>
+                    <p>
+                        • Thành tích: Đạt giải Ba trong Kỳ thi chọn Học sinh giỏi cấp Tỉnh môn Tin học.<br>
+                        • Sở trường: Tư duy logic toán học tốt, tác phong kỷ luật cao, làm việc cẩn trọng và có năng lực xử lý số liệu nhạy bén.
+                    </p>
+                </div>
+            </section>
+
+            <!-- MỤC 3: KỸ NĂNG CÁ NHÂN -->
+            <section>
+                <div class="section-title">Kỹ năng cá nhân</div>
+                <ul class="skills-list">
+                    <li>Thành thạo ứng dụng văn phòng: Word, Excel (Tích hợp công cụ AI)</li>
+                    <li>Ngôn ngữ lập trình hệ thống: C++, C#, JavaScript</li>
+                    <li>Phát triển Web cơ bản: HTML5, CSS3, JavaScript ứng dụng</li>
+                    <li>Sử dụng thành thạo nền tảng công nghệ: Git, GitHub, Vercel, Replit</li>
+                    <li>Tư duy giải thuật logic & Phân tích số liệu toán học tốt</li>
+                    <li>Kỹ năng đồ họa cơ bản & Tối ưu hóa giao diện hiển thị hình ảnh số</li>
+                </ul>
+            </section>
+            
+            <div class="hexagon-decor">⬡⬡</div>
+        </div>
+
+        <!-- CỘT BÊN PHẢI (ẢNH VÀ GIỚI THIỆU KHUNG MÀU) -->
+        <div class="right-column">
+            
+            <!-- KHUNG CHỨA ẢNH ĐÃ ĐƯỢC CHÈN ẢNH CHÂN DUNG CỦA BẠN -->
+            <div class="photo-section">
+                <div class="star-decor">✦</div>
+                <div class="image-box">
+                    <img src="Gemini_Generated_Image_1golc01golc01gol.jpg" alt="Ảnh chân dung Trần Hiếu">
+                </div>
+            </div>
+
+            <!-- KHỐI MÀU XANH LỤC BẢO PHÍA DƯỚI -->
+            <div class="teal-section">
+                <div class="section-title">Giới thiệu bản thân</div>
+                <p>
+                    Là một người đề cao sự đơn giản và tính chính xác, tôi có kinh nghiệm xây dựng các hệ thống chatbot và công cụ tự động hóa thông minh. Trong mọi bài toán kỹ thuật, tôi luôn hướng tới sự chỉn chu, tối ưu hóa để tạo ra những sản phẩm công nghệ có giá trị thực tiễn cao. Bên cạnh đó, nhờ năng lực ứng dụng AI vào các công cụ văn phòng (Excel, Word) cùng quy trình tự kiểm soát nghiêm ngặt, tôi tự tin có thể thúc đẩy tiến độ công việc một cách nhanh chóng, chuẩn xác, mang lại lợi ích tối ưu cho quý công ty.
+                </p>
+            </div>
+
+            <!-- KHUNG THÔNG TIN LIÊN HỆ KIỂU WIDGET -->
+            <div class="contact-widget">
+                <div class="widget-header">
+                    <span class="widget-dot"></span>
+                    <span class="widget-dot"></span>
+                    <span class="widget-dot"></span>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-item">
+                        <span class="contact-text">+84-0325.910.417</span>
+                        <div class="toggle-switch"></div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-text">ht256730@gmail.com</span>
+                        <div class="toggle-switch"></div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-text">Công Chính, Thanh Hóa, Việt Nam</span>
+                        <div class="toggle-switch"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
